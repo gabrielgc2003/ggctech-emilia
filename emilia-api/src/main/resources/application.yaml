@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: emilia
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+
+jwt:
+  secret: ${JWT_SECRET:dev-secret-change-me}
+
+emilia:
+  system:
+    api-key: ${API_KEY:default_api_key}
+
+server:
+  port: ${SERVER_PORT:8080}
+
+logging:
+  level:
+    root: INFO
+
+
+
+
