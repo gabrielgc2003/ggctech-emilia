@@ -5,11 +5,11 @@ spring:
     active: ${SPRING_PROFILES_ACTIVE:dev}
 
 jwt:
-  secret: ${JWT_SECRET:dev-secret-change-me}
+  secret: ${JWT_SECRET:emilia-super-secret-jwt-key-with-32-bytes-min}
 
 emilia:
   system:
-    api-key: ${API_KEY:default_api_key}
+    api-key: ${API_KEY:emilia-super-secret-api-key-with-32-bytes-min}
 
 server:
   port: ${SERVER_PORT:8080}
@@ -17,6 +17,9 @@ server:
 logging:
   level:
     root: INFO
+n8n:
+  webhook:
+    consent: ${N8N_WEBHOOK_CONSENT:/webhook/consent}
 
 
 

@@ -1,11 +1,15 @@
 package com.ggctech.emilia.controllers;
 
 
-import com.ggctech.emilia.dtos.AuthResponse;
-import com.ggctech.emilia.dtos.LoginRequest;
-import com.ggctech.emilia.dtos.RegisterRequest;
+import com.ggctech.emilia.model.dtos.auth.AuthResponse;
+import com.ggctech.emilia.model.dtos.auth.LoginRequest;
+import com.ggctech.emilia.model.dtos.account.AccountUserRegisterRequest;
+import com.ggctech.emilia.model.dtos.account.AccountUserRegisterResponse;
+import com.ggctech.emilia.services.AccountUserService;
 import com.ggctech.emilia.services.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
+    private final AccountUserService accountUserService;
 
     @PostMapping("/login")
     public AuthResponse login(@RequestBody LoginRequest loginRequest) {
@@ -23,7 +28,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public AuthResponse register(@RequestBody RegisterRequest registerRequest) {
-        return authService.register(registerRequest);
+    public ResponseEntity<AccountUserRegisterResponse> register(@Valid @RequestBody AccountUserRegisterRequest accountUserRegisterRequest) {
+        return ResponseEntity.ok(accountUserService.register(accountUserRegisterRequest));
     }
 }

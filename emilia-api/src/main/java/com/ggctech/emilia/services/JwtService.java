@@ -1,6 +1,6 @@
 package com.ggctech.emilia.services;
 
-import com.ggctech.emilia.model.Psychologist;
+import com.ggctech.emilia.model.AccountUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -19,9 +19,9 @@ public class JwtService {
 
     private static final long USER_EXPIRATION = 1000 * 60 * 60 * 8; // 8h
 
-    public String generateUserToken(Psychologist psychologist) {
+    public String generateUserToken(AccountUser accountUser) {
         return Jwts.builder()
-                .setSubject(psychologist.getId().toString())
+                .setSubject(accountUser.getId().toString())
                 .claim("role", "USER")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + USER_EXPIRATION))
