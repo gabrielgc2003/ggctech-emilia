@@ -95,23 +95,12 @@ public class GlobalExceptionHandler {
             RuntimeException ex,
             HttpServletRequest request
     ) {
-        return build(
-                HttpStatus.INTERNAL_SERVER_ERROR,
-                "Internal Server Error",
-                ex.getMessage(),
-                request
-        );
-    }
+        ex.printStackTrace(); // 🔥 ESSENCIAL AGORA
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiErrorResponse> handleGeneric(
-            Exception ex,
-            HttpServletRequest request
-    ) {
         return build(
                 HttpStatus.INTERNAL_SERVER_ERROR,
                 "Internal Server Error",
-                "Unexpected error occurred",
+                ex.getClass().getSimpleName() + ": " + ex.getMessage(),
                 request
         );
     }

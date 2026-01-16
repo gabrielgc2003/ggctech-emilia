@@ -5,21 +5,20 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AccountPreRegisterRequest {
-    @NotNull
-    @NotBlank
-    private String name;
+public record AccountPreRegisterRequest(@NotNull
+                                      @NotBlank
+                                      String name,
+                                      @NotNull
+                                      @NotBlank
+                                      @Email
+                                      String email,
+                                      @NotNull
+                                      @NotBlank
+                                      String phone,
+                                      Integer billingDay) {
 
-    @NotNull
-    @NotBlank
-    @Email
-    private String email;
-
-    @NotNull
-    @NotBlank
-    private String phone;
-    private Integer billingDay;
 }

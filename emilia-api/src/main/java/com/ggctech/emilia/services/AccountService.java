@@ -18,14 +18,14 @@ public class AccountService {
     private final AccountRepository accountRepository;
 
     public AccountPreRegisterResponse createAccount(AccountPreRegisterRequest  accountPreRegisterRequest) {
-        if (accountRepository.existsAccountByEmail (accountPreRegisterRequest.getEmail())) {
+        if (accountRepository.existsAccountByEmail (accountPreRegisterRequest.email())) {
             throw new IllegalArgumentException("Account with this email already exists");
         }
         Account account = new Account();
-        account.setEmail(accountPreRegisterRequest.getEmail());
-        account.setName(accountPreRegisterRequest.getName());
-        account.setPhone(accountPreRegisterRequest.getPhone());
-        account.setBillingDay(accountPreRegisterRequest.getBillingDay());
+        account.setEmail(accountPreRegisterRequest.email());
+        account.setName(accountPreRegisterRequest.name());
+        account.setPhone(accountPreRegisterRequest.phone());
+        account.setBillingDay(accountPreRegisterRequest.billingDay());
         account.setInviteToken(UUID.randomUUID().toString());
         account.setStatus(Status.PENDING);
 

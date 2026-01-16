@@ -30,12 +30,13 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        // públicos
                         .requestMatchers(HttpMethod.GET, "/health/**").permitAll()
-                        .requestMatchers("/auth/**").permitAll()
-                        // system (n8n)
-                        .requestMatchers("/system/**").hasRole("SYSTEM")
-                        // qualquer outro precisa estar autenticado
+                        .requestMatchers("/api/v1/auth/**").permitAll()
+
+                        // SYSTEM (API KEY)
+                        .requestMatchers("/system/**").hasAuthority("SYSTEM")
+                        .requestMatchers("/api/v1/accounts/create").hasAuthority("SYSTEM")
+
                         .anyRequest().authenticated()
                 )
                 // API KEY PRIMEIRO
