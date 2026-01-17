@@ -8,10 +8,14 @@ import lombok.Data;
 public class SubjectWithAccountConfigResponse {
     private String subjectId;
     private String subjectName;
+    private String subjectStatus;
     private String accountId;
     private String accountName;
+    private String accountStatus;
     private String basePrompt;
     private String conversationRules;
     private String forbiddenTopics;
     private String metadata;
+    private String configMetadata;
+
 }

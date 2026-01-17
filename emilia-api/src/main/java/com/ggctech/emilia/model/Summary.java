@@ -20,10 +20,6 @@ public class Summary extends BaseModel {
     @JoinColumn(name = "subject_id", nullable = false)
     private Subject subject;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "domain", nullable = false)
-    private Domain domain;
-
     @Column(name = "period_start", nullable = false)
     private Instant periodStart;
 

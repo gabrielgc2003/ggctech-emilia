@@ -21,7 +21,7 @@ public class Consent extends BaseModel {
     @Column(name = "consent_version", nullable = false)
     private String consentVersion;
 
-    @Column(name = "accepted_at", nullable = false)
+    @Column(name = "accepted_at")
     private Instant acceptedAt;
 
     @Enumerated(EnumType.STRING)

@@ -19,6 +19,9 @@ public record AccountPreRegisterRequest(@NotNull
                                       @NotNull
                                       @NotBlank
                                       String phone,
+                                      @NotNull
+                                      @NotBlank
+                                      String domain,
                                       Integer billingDay) {
 
 }

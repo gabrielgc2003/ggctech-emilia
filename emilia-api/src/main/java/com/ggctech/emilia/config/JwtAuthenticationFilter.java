@@ -1,5 +1,9 @@
 package com.ggctech.emilia.config;
 
+import com.ggctech.emilia.model.AccountUser;
+import com.ggctech.emilia.model.dtos.auth.AuthenticatedUser;
+import com.ggctech.emilia.model.enums.Role;
+import com.ggctech.emilia.repositories.AccountUserRepository;
 import com.ggctech.emilia.services.JwtService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
@@ -24,6 +28,7 @@ import java.util.UUID;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
+    private final AccountUserRepository accountUserRepository;
 
     @Override
     protected void doFilterInternal(
@@ -52,8 +57,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 return;
             }
 
+            AccountUser accountUser = accountUserRepository.findById(
+                    UUID.fromString(claims.getSubject())
+            ).orElseThrow(() -> new RuntimeException("User not found"));
+
+            AuthenticatedUser user = new AuthenticatedUser(
+                    accountUser.getId().toString(),
+                    accountUser.getAccount().getId(),
+                    accountUser.getEmail(),
+                    Role.valueOf(claims.get("role").toString())
+            );
             var authentication = new UsernamePasswordAuthenticationToken(
-                    claims.getSubject(),
+                    user,
                     null,
                     List.of(new SimpleGrantedAuthority("ROLE_USER"))
             );

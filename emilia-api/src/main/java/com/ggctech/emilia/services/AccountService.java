@@ -3,6 +3,7 @@ package com.ggctech.emilia.services;
 import com.ggctech.emilia.model.Account;
 import com.ggctech.emilia.model.dtos.account.AccountPreRegisterRequest;
 import com.ggctech.emilia.model.dtos.account.AccountPreRegisterResponse;
+import com.ggctech.emilia.model.enums.Domain;
 import com.ggctech.emilia.model.enums.Status;
 import com.ggctech.emilia.repositories.AccountRepository;
 import jakarta.validation.Valid;
@@ -27,6 +28,7 @@ public class AccountService {
         account.setPhone(accountPreRegisterRequest.phone());
         account.setBillingDay(accountPreRegisterRequest.billingDay());
         account.setInviteToken(UUID.randomUUID().toString());
+        account.setDomain(Domain.valueOf(accountPreRegisterRequest.domain()));
         account.setStatus(Status.PENDING);
 
         account = accountRepository.save(account);

@@ -1,5 +1,6 @@
 package com.ggctech.emilia.model;
 
+import com.ggctech.emilia.model.enums.Domain;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,6 +29,10 @@ public class Account extends BaseModel {
 
     @Column(name = "invite_token", unique = true)
     private String inviteToken;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "domain", nullable = false)
+    private Domain domain;
 
     @OneToOne(mappedBy = "account")
     private AccountPromptConfig accountPromptConfig;

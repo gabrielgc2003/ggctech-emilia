@@ -35,7 +35,7 @@ public class SecurityConfig {
 
                         // SYSTEM (API KEY)
                         .requestMatchers("/system/**").hasAuthority("SYSTEM")
-                        .requestMatchers("/api/v1/accounts/create").hasAuthority("SYSTEM")
+                        .requestMatchers("/api/v1/account-users/create").hasAuthority("SYSTEM")
 
                         .anyRequest().authenticated()
                 )

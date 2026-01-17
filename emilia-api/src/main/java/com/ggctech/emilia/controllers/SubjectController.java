@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/v1/subjects")
 @RequiredArgsConstructor
@@ -24,5 +26,13 @@ public class SubjectController {
             @AuthenticationPrincipal AuthenticatedUser user
     ) {
         return subjectService.create(request, user.accountId());
+    }
+
+    @GetMapping("/{id}")
+    public SubjectResponse getSubject(
+            @PathVariable UUID id,
+            @AuthenticationPrincipal AuthenticatedUser user
+    ) {
+        return subjectService.getSubject(id, user.accountId());
     }
 }
